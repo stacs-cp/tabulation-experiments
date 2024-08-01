@@ -1,0 +1,76 @@
+{
+    "solver_limit_seconds" : 3600,
+    "savilerow_limit_seconds" : 3600,
+    "combined_timeout" : 3600,
+    "timeout_penalty" : 2,
+    "runs" : 5,
+    "use_solver_variations" : [
+
+	["minion", "notab"],
+	["ortools", "notab"],
+	["chuffed", "notab"],
+	["gecode", "notab"],
+	["kissat", "notab"],
+	["kissmdd", "notab"],
+	["minion", "tab"],
+	["ortools", "tab"],
+	["chuffed", "tab"],
+	["gecode", "tab"],
+	["kissat", "tab"],
+	["kissmdd", "tab"],
+	["minion", "tabnolim"],
+	["ortools", "tabnolim"],
+	["chuffed", "tabnolim"],
+	["gecode", "tabnolim"],
+	["kissat", "tabnolim"],
+	["kissmdd", "tabnolim"]
+
+    ],
+    "command_stub" : "savilerow -run-solver -dryruns -timelimit <<SAVILEROWLIMIT>>",
+    "problems_directory" : "problems",
+    "problem_titles" : [],
+    "featured_plots" : {},
+    "solvers_available" : [
+	{ "id" : "minion",
+	  "title" : "Minion",
+	  "args" : "-minion -solver-options \"-randomseed <<SEED>> -cpulimit <<SOLVERLIMIT>>\""
+	},
+	{ "id" : "gecode",
+	  "title" : "Gecode",
+	  "args" : "-gecode -gecode-bin fzn-gecode -solver-options \"-r <<SEED>> -time <<SOLVERLIMIT>>000\""
+	},
+	{ "id" : "kissat",
+	  "title" : "Kissat",
+	  "args" : "-sat -sat-family kissat -satsolver-bin kissat -solver-options \"--seed=<<SEED>> --time=<<SOLVERLIMIT>>\""
+	},
+	{ "id" : "kissmdd",
+	  "title" : "Kissat (MDD)",
+	  "args" : "-sat -sat-family kissat -satsolver-bin kissat -sat-table-mdd -solver-options \"--seed=<<SEED>> --time=<<SOLVERLIMIT>>\""
+	},
+	{ "id" : "chuffed",
+	  "title" : "Chuffed",
+	  "args" : "-chuffed -solver-options \"--rnd-seed <<SEED>> -t <<SOLVERLIMIT>>000\""
+	},
+	{ "id" : "ortools",
+	  "title" : "OR-tools",
+	  "args" : "-or-tools -or-tools-bin fzn-ortools -solver-options \"--fz_seed <<SEED>> --time_limit <<SOLVERLIMIT>>\""
+	}
+    ],
+    "variations_available" :
+    [
+	{"id" : "notab", "title" : "No Tabulation" , "extra_args" : ""},
+	{"id" : "tab", "title" : "Tabulation On" , "extra_args" : "-tabulate2"},
+	{"id" : "tabnolim", "title" : "Tab. No Limit " , "extra_args" : "-tabulate2 -tab-nolimit -tabulate-diagnostics"}
+    ],
+    "extra_problem_args" : {},
+    "plots" : {
+        "speedup_min_max" : [0.9,1.1],
+        "show_n_worst" : 8,
+        "show_n_best" : 8
+    },
+    "stats" : {
+        "calc_ci_for_at_least" : 11,
+        "bs_samples" : 100000
+    }
+}
+

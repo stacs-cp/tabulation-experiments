@@ -1,0 +1,11 @@
+
+
+Compare to savilerow-master/experiments/ac-cse-big2/problems/
+
+
+OPD has been collected into 1 folder. 
+
+Quasigroup has been split into separate folders but models/params same. 
+
+All problem classes copied over from savilerow-master/experiments/ac-cse-big2/problems/.
+

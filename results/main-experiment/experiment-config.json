@@ -1,0 +1,106 @@
+{
+    "solver_limit_seconds" : 3600,
+    "savilerow_limit_seconds" : 3600,
+    "combined_timeout" : 3600,
+    "timeout_penalty" : 2,
+    "runs" : 5,
+    "use_solver_variations" : [
+
+	["minion", "notab"],
+	["minion", "tab"],
+	["minion", "tabsatlim"],
+
+	["ortools", "notab"],
+	["ortools", "tab"],
+	["ortools", "tabsatlim"],
+
+	["chuffed", "notab"],
+	["chuffed", "tab"],
+	["chuffed", "tabsatlim"],
+
+	["gecode", "notab"],
+	["gecode", "tab"],
+	["gecode", "tabsatlim"],
+
+	["kissat", "notab"],
+	["kissat", "tab"],
+	["kissat", "tabsatlim"],
+
+	["kissmdd", "notab"],
+	["kissmdd", "tab"],
+	["kissmdd", "tabsatlim"]
+
+    ],
+    "command_stub" : "savilerow -run-solver -dryruns -solutions-to-null -timelimit <<SAVILEROWLIMIT>>",
+    "problems_directory" : "problems",
+    "problem_titles" : [
+	{"dir" : "ft-accordion",        "title" : "Accordion Patience"},
+	{"dir" : "ft-blackHole",        "title" : "Black Hole"},
+	{"dir" : "ft-bpmp",             "title" : "Block Party Metacube"},
+	{"dir" : "ft-coprime",          "title" : "Co-prime Sets"},
+	{"dir" : "ft-hts",              "title" : "H-ball Tournament"},
+	{"dir" : "ft-hts-orig",         "title" : "H-ball Tournament"},
+	{"dir" : "ft-hts-fortab",       "title" : "H-ball Preprocessed"},
+	{"dir" : "ft-JPEncoding",       "title" : "JP Encoding"},
+	{"dir" : "ft-killerSudoku16",   "title" : "Killer Sudoku"},
+	{"dir" : "ft-knights",          "title" : "Kn. Tour (sequence)"},
+	{"dir" : "ft-knights2",         "title" : "Kn. Tour (successor)"},
+	{"dir" : "ft-nlinkedseq",       "title" : "N-linked Sequence"},
+	{"dir" : "ft-nlinkedopt2",      "title" : "N-linked Optimal"},
+	{"dir" : "ft-paqueens1",        "title" : "Peaceable Queens"},
+	{"dir" : "ft-sedf",             "title" : "Strong Ext Diff Fams"},
+	{"dir" : "ft-sportsScheduling", "title" : "Sports Scheduling"},
+	{"dir" : "ft-stilllife",        "title" : "Max Dens Still Life"}
+    ],
+    "featured_plots" : {
+        "baseline" : ["ft-blackHole", "ft-bpmp", "ft-hts", "ft-JPEncoding", "ft-stilllife", "ft-sportsScheduling"],
+        "feat-a"   : ["ft-accordion", "ft-coprime", "ft-killerSudoku16", "ft-knights", "ft-knights2"],
+        "feat-b"   : ["ft-nlinkedseq", "ft-nlinkedopt2", "ft-paqueens1", "ft-sedf"],
+        "learning" : ["ft-bpmp", "ft-killerSudoku16","ft-sportsScheduling", "ft-stilllife"]
+    },
+    "solvers_available" : [
+	{ "id" : "minion",
+	  "title" : "Minion",
+	  "args" : "-minion -solver-options \"-randomseed <<SEED>> -cpulimit <<SOLVERLIMIT>>\""
+	},
+	{ "id" : "gecode",
+	  "title" : "Gecode",
+	  "args" : "-gecode -gecode-bin fzn-gecode -solver-options \"-r <<SEED>> -time <<SOLVERLIMIT>>000\""
+	},
+	{ "id" : "kissat",
+	  "title" : "Kissat",
+	  "args" : "-sat -sat-family kissat -satsolver-bin kissat -solver-options \"--seed=<<SEED>> --time=<<SOLVERLIMIT>>\""
+	},
+	{ "id" : "kissmdd",
+	  "title" : "Kissat (MDD)",
+	  "args" : "-sat -sat-family kissat -satsolver-bin kissat -sat-table-mdd -solver-options \"--seed=<<SEED>> --time=<<SOLVERLIMIT>>\""
+	},
+	{ "id" : "chuffed",
+	  "title" : "Chuffed",
+	  "args" : "-chuffed -solver-options \"--rnd-seed <<SEED>> -t <<SOLVERLIMIT>>000\""
+	},
+	{ "id" : "ortools",
+	  "title" : "OR-tools",
+	  "args" : "-or-tools -or-tools-bin fzn-ortools -solver-options \"--fz_seed <<SEED>> --time_limit <<SOLVERLIMIT>>\""
+	}
+    ],
+    "variations_available" :
+    [
+	{"id" : "notab",     "title" : "TabID Off" ,               "extra_args" : ""},
+	{"id" : "tab",       "title" : "TabID On" ,                "extra_args" : "-tabulate2"},
+	{"id" : "tabsatlim", "title" : "TabID w. SAT Size Limit" , "extra_args" : "-tabulate2 -tab-satsizelimit"}
+    ],
+    "extra_problem_args" : { 
+        "JPEncoding.eprime" : "-sat-sum-gpw -sat-pb-gpw"
+    },
+    "plots" : {
+        "speedup_min_max" : [0.9,1.1],
+        "show_n_worst" : 8,
+        "show_n_best" : 8
+    },
+    "stats" : {
+        "calc_ci_for_at_least" : 11,
+        "bs_samples" : 100000
+    }
+}
+
